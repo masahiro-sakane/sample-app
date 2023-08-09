@@ -5,6 +5,6 @@ RUN cd /
 # Mavenのビルド成果物(hello-app.jar)をコンテナイメージにCOPY
 COPY target/hello-app.jar .
 # Mavenのビルド成果物(libs以下を)をコンテナイメージにCOPY
-COPY target/libs/* .
+COPY target/libs libs
 # ExecutableJarをjavaコマンドで起動
 CMD ["java", "-jar", "hello-app.jar"]
