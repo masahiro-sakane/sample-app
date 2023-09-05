@@ -16,12 +16,13 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
-@HelidonTest
+@HelidonTest(resetPerTest = true)
 @AddConfig(key = "server.port", value = "7001")
 @ExtendWith(JulToSLF4DelegateExtension.class)
 public class HelloResourceTest {
 
     private HelloResource helllResource;
+
 
     @BeforeEach
     public void setup() throws Exception {
@@ -32,6 +33,14 @@ public class HelloResourceTest {
     @Test
     void tesHello() {
         var expected = "Hello";
+        var actual = helllResource.hello();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @AddConfig(key = "CONFIG_VAL", value = "Hoge")
+    void tesHelloByConfig() {
+        var expected = "Hoge";
         var actual = helllResource.hello();
         assertEquals(expected, actual);
     }
